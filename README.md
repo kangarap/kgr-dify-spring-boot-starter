@@ -43,24 +43,16 @@ kgr:
         System.out.println(workflowRunInfoRequest.doRequest());
         
         
-        
-        // 执行工作流方式一
-        String api = kgrDifyProperties.getWorkflow().getApi();
-        String authorizationHeader = "Bearer " + kgrDifyProperties.getWorkflow().getAppInfo(appId).getAppKey();
-        WorkflowRunRequest request = new WorkflowRunRequest(api, authorizationHeader);
+        // 执行工作流
+        WorkflowRunRequest request = new WorkflowRunRequest();
         Map<String, Object> inputs = new HashMap<>();
         inputs.put("自定义参数1", "自定义参数1的值");
         request.setInputs(inputs);
+        request.setAppId("test");
         // 填项目名称或者其他必填
         request.setUser("test"); 
         // execute 替代传统方案
         request.execute(); 
-        
-        // 执行工作流方式二, 直接提供appId
-        WorkflowRunRequest workflowRunRequest = new WorkflowRunRequest(appId);
-        workflowRunRequest.setUser("trest");
-        workflowRunRequest.setInputs(inputs);
-        workflowRunRequest.execute();
 
         return "execute success";
     }

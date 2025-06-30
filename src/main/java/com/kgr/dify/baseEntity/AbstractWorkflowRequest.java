@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +23,9 @@ import java.util.Map;
  * 对接方式改动
  */
 @Slf4j
-public abstract class AbstractWorkflowRequest<T extends DifyResponse>  {
+public abstract class AbstractWorkflowRequest<T extends DifyResponse>  implements Serializable {
 
-    private static final KgrDifyProperties KGR_DIFY_PROPERTIES = SpringUtil.getBean("kgrDifyProperties");
+    public static final KgrDifyProperties KGR_DIFY_PROPERTIES = SpringUtil.getBean("kgrDifyProperties");
 
     public String appId;
     String url;

@@ -3,27 +3,27 @@
   <groupId>com.kgr.dify</groupId>
   <artifactId>kgr-dify-spring-boot-starter</artifactId>
   <versioning>
-    <lastUpdated>20250627023842</lastUpdated>
+    <lastUpdated>20250630060039</lastUpdated>
     <snapshot>
-      <timestamp>20250627.023842</timestamp>
-      <buildNumber>16</buildNumber>
+      <timestamp>20250630.060039</timestamp>
+      <buildNumber>1</buildNumber>
     </snapshot>
     <snapshotVersions>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.0.1-20250627.023842-16</value>
-        <updated>20250627023842</updated>
+        <value>0.0.1-20250630.060039-1</value>
+        <updated>20250630060039</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>0.0.1-20250627.023842-16</value>
-        <updated>20250627023842</updated>
+        <value>0.0.1-20250630.060039-1</value>
+        <updated>20250630060039</updated>
       </snapshotVersion>
       <snapshotVersion>
         <classifier>sources</classifier>
         <extension>jar</extension>
-        <value>0.0.1-20250627.023842-16</value>
-        <updated>20250627023842</updated>
+        <value>0.0.1-20250630.060039-1</value>
+        <updated>20250630060039</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

@@ -6,9 +6,10 @@ import cn.hutool.http.Method;
 import cn.hutool.json.JSONUtil;
 import com.kgr.dify.baseEntity.AbstractWorkflowRequest;
 import com.kgr.dify.config.KgrDifyProperties;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,6 +22,7 @@ import java.util.Map;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
+@NoArgsConstructor
 public class WorkflowRunRequest extends AbstractWorkflowRequest<WorkflowRunResponse> {
 
     // 请求参数（允许空对象）
@@ -31,21 +33,16 @@ public class WorkflowRunRequest extends AbstractWorkflowRequest<WorkflowRunRespo
     private String user;
 
     private String appId;
+
+    // 由内部派生
     private String api;
     private String authorizationHeader;
 
 
-    private static final KgrDifyProperties kgrDifyProperties = SpringUtil.getBean("kgrDifyProperties");
-
-
-    public WorkflowRunRequest(String appId){
-        this.api = kgrDifyProperties.getWorkflow().getApi();
-        this.authorizationHeader = "Bearer " + kgrDifyProperties.getWorkflow().getAppInfo(appId).getAppKey();
-    }
-
-    public WorkflowRunRequest(String api, String authorizationHeader){
-        this.api = api;
-        this.authorizationHeader = authorizationHeader;
+    public void setAppId(String appId) {
+        this.appId = appId;
+        this.api = KGR_DIFY_PROPERTIES.getWorkflow().getApi();
+        this.authorizationHeader = "Bearer " + KGR_DIFY_PROPERTIES.getWorkflow().getAppInfo(appId).getAppKey();
     }
 
     @Override
@@ -55,9 +52,9 @@ public class WorkflowRunRequest extends AbstractWorkflowRequest<WorkflowRunRespo
 
     public Flux<String> execute() {
         return WebClient.create().post()
-                .uri(api + "/workflows/run")
+                .uri(this.api + "/workflows/run")
                 .header("Content-Type", "application/json")
-                .header("Authorization", authorizationHeader)
+                .header("Authorization",  this.authorizationHeader)
                 .accept(MediaType.TEXT_EVENT_STREAM)
                 .bodyValue(JSONUtil.toJsonStr(this))
                 .retrieve()
